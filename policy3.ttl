@@ -1,0 +1,50 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix ex: <http://example.org/policy/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ex:policy002 a odrl:Policy ;
+    dct:title "Research Data Access - Nordic Countries" ;
+    dct:description "Research data restricted to Sweden, Finland, and Denmark using mixed representation formats" ;
+    dct:creator "Nordic Research Council" ;
+    dct:issued "2025-01-10"^^xsd:date ;
+    odrl:permission [
+        a odrl:Permission ;
+        odrl:target ex:researchDataset001 ;
+        odrl:action odrl:read ;
+        odrl:action odrl:derive ;
+        odrl:constraint [
+            a odrl:LogicalConstraint ;
+            odrl:or (
+                [
+                    odrl:leftOperand odrl:spatial ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand <https://dbpedia.org/resource/Sweden>
+                ]
+                [
+                    odrl:leftOperand odrl:spatial ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand "FI"
+                ]
+                [
+                    odrl:leftOperand odrl:spatial ;
+                    odrl:operator odrl:eq ;
+                    odrl:rightOperand <https://www.geonames.org/2623032/>
+                ]
+            )
+        ]
+    ] ;
+    odrl:duty [
+        a odrl:Duty ;
+        odrl:action odrl:attribute ;
+        odrl:constraint [
+            a odrl:Constraint ;
+            odrl:leftOperand odrl:delayPeriod ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand "P30D"^^xsd:duration
+        ]
+    ] .
+
+ex:researchDataset001 a dct:Dataset ;
+    dct:title "Nordic Climate Research Data 2020-2024" ;
+    dct:description "Climate and environmental research data from Nordic countries" .

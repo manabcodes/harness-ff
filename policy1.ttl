@@ -1,0 +1,13 @@
+@prefix odrl: <http://www.w3.org/ns/odrl/2/> .
+@prefix ex: <http://example.org/> .
+
+ex:policy1 a odrl:Policy ;
+    odrl:permission [
+        odrl:target ex:dataset1 ;
+        odrl:action odrl:read ;
+        odrl:constraint [
+            odrl:leftOperand odrl:spatial ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand "DE"
+        ]
+    ] .
