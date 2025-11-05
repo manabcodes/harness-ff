@@ -309,6 +309,102 @@ class HarnessFF:
         except Exception as e:
             raise Exception(f"Failed to fetch or parse policy: {str(e)}")
     
+
+    def run_sparql_query(self, query: str):
+        """Execute a SPARQL query on the loaded policy graph"""
+        if self.graph is None:
+            raise Exception("No policy loaded. Call analyze_policy first.")
+        
+        results = self.graph.query(query)
+        return results
+
+    
+    def analyze_with_sparql(self, policy_source: str) -> EvaluationReport:
+        """Analyze policy using SPARQL queries instead of graph iteration"""
+        try:
+            # Load the policy
+            if policy_source.startswith('http'):
+                self.fetch_policy(policy_source)
+            else:
+                self.graph = Graph()
+                self.graph.parse(policy_source)
+            
+            restrictions = []
+            eu_countries = set()
+            
+            # SPARQL query to find all rightOperand values in constraints
+            sparql_query = """
+            PREFIX odrl: <http://www.w3.org/ns/odrl/2/>
+            
+            SELECT ?constraint ?rightOperand
+            WHERE {
+                ?policy a odrl:Policy .
+                ?policy odrl:permission|odrl:prohibition ?rule .
+                ?rule odrl:constraint ?constraint .
+                ?constraint odrl:rightOperand ?rightOperand .
+            }
+            """
+            
+            print(f"\nDEBUG: Running SPARQL query...")
+            results = self.graph.query(sparql_query)
+            
+            for row in results:
+                constraint = str(row.constraint)
+                right_operand = str(row.rightOperand)
+                
+                print(f"DEBUG: Found rightOperand via SPARQL: {right_operand}")
+                country, repr_type = self.resolver.identify_country(right_operand)
+                
+                if country:
+                    print(f"DEBUG: MATCH! Country: {country}, Type: {repr_type}")
+                    restriction = LocalizationRestriction(
+                        restriction_type=RestrictionType.SPATIAL_CONSTRAINT,
+                        country=country,
+                        country_representation=repr_type,
+                        original_value=right_operand,
+                        policy_element=constraint
+                    )
+                    restrictions.append(restriction)
+                    eu_countries.add(country)
+            
+            # Generate report
+            if len(restrictions) == 0:
+                status = ComplianceStatus.COMPLIANT
+                summary = "No data localization restrictions related to EU member states detected."
+                recommendations = ["Policy appears compliant with Regulation (EU) 2018/1807."]
+            else:
+                status = ComplianceStatus.POTENTIAL_VIOLATION
+                summary = f"Found {len(restrictions)} potential data localization restriction(s) " \
+                         f"involving {len(eu_countries)} EU member state(s): {', '.join(sorted(eu_countries))}."
+                recommendations = [
+                    "Review identified restrictions for compliance with Regulation (EU) 2018/1807.",
+                    "Verify if restrictions are justified by public security concerns.",
+                    "Consider removing unjustified geographic constraints.",
+                    "Consult legal counsel for detailed compliance assessment."
+                ]
+            
+            return EvaluationReport(
+                policy_uri=policy_source,
+                compliance_status=status,
+                restrictions_found=restrictions,
+                eu_member_states_involved=eu_countries,
+                analysis_summary=summary,
+                recommendations=recommendations
+            )
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            return EvaluationReport(
+                policy_uri=policy_source,
+                compliance_status=ComplianceStatus.ERROR,
+                restrictions_found=[],
+                eu_member_states_involved=set(),
+                analysis_summary=f"Error analyzing policy: {str(e)}",
+                recommendations=["Fix policy format or accessibility issues."]
+            )
+
+
     def analyze_policy(self, policy_source: str) -> EvaluationReport:
         """
         Analyze ODRL policy for data localization restrictions
