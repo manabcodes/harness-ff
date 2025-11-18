@@ -1,0 +1,1304 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="https://purl.org/ffdro"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="https://purl.org/ffdro">
+    <Prefix name="" IRI="https://purl.org/ffdro"/>
+    <Prefix name="dct" IRI="http://purl.org/dc/terms/"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="odrl" IRI="http://www.w3.org/ns/odrl/2/"/>
+    <Prefix name="prov" IRI="http://www.w3.org/ns/prov#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Prefix name="skos" IRI="http://www.w3.org/2004/02/skos/core#"/>
+    <Prefix name="vann" IRI="http://purl.org/vocab/vann/"/>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dct:created"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-11-18</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dct:creator"/>
+        <Literal>Meem Arafat Manab</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dct:creator"/>
+        <Literal>Victor Rodriguez-Doncel</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dct:description"/>
+        <Literal xml:lang="en">An ontology for detecting and representing data localisation restrictions 
+    in ODRL policies with respect to EU Regulation 2018/1807 on the free flow of non-personal data.</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="dct:title"/>
+        <Literal xml:lang="en">Free Flow Data Restrictions (FFDR) Ontology</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="vann:preferredNamespacePrefix"/>
+        <Literal>ffdro</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="vann:preferredNamespaceUri"/>
+        <Literal>https://purl.org/ffdro#</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <Literal xml:lang="en">This ontology supports automated compliance checking of data usage policies 
+    against Article 4 of Regulation (EU) 2018/1807, which prohibits data localisation requirements 
+    unless justified on grounds of public security.
+    
+    The ontology is organized into three conceptual modules using SKOS Collections:
+    - Core Module: Essential classes for basic Article 4 compliance detection (5 classes, 8 properties)
+    - Extended Module: Rich metadata for provenance and detailed classification (6 classes, 7 properties)  
+    - Integration Module: Links to external vocabularies like ODRL and PROV-O (3 classes, 5 properties)</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty abbreviatedIRI="owl:versionInfo"/>
+        <Literal>1.0</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ1: Does this ODRL policy contain any geographic 
+restrictions on data storage, processing, or access?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ2: Are any detected geographic restrictions related to EU member states?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ3: What is the compliance status of this policy with respect to Article 4 
+of Regulation 2018/1807?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ4: Which specific ODRL constraints contain data localisation violations?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ5: Has a detected localisation restriction been justified on public 
+security grounds?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ6: What method was used to detect a geographic reference 
+(URI matching, ISO code, string matching)?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ7: What is the confidence level of a detected restriction?</Literal>
+    </Annotation>
+    <Annotation>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+        <Literal xml:lang="en">CQ8: What type of restriction was detected (storage/processing/access)?</Literal>
+    </Annotation>
+    <Declaration>
+        <Class abbreviatedIRI="skos:Collection"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="odrl:Constraint"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="odrl:Policy"/>
+    </Declaration>
+    <Declaration>
+        <Class abbreviatedIRI="prov:Activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="AccessRestriction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Article4Violation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="CanonicalLocation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="ComplianceEvaluation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="EUMemberState"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="GeographicReference"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="Justification"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="LocalisationRestriction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="PolicyViolation"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="ProcessingRestriction"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="PublicSecurityJustification"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="RegulatoryArticle"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="StorageRestriction"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="detectedIn"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="evaluatedPolicy"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="foundRestriction"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="foundViolation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="hasJustification"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="normalizedAs"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="restrictsToLocation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="restrictsToMemberState"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="violatesArticle"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="complianceStatus"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="confidenceScore"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="detectionMethod"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="evaluationTimestamp"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="iso3166Alpha2"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="iso3166Alpha3"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="justificationRequired"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="originalValue"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="restrictionType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="violationDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="violationSeverity"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Article4"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="Article5"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="CoreModule"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="ExtendedModule"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="IntegrationModule"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dct:created"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dct:creator"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dct:description"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="dct:title"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="vann:preferredNamespacePrefix"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="vann:preferredNamespaceUri"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:note"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="ModuleUsageNote"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="SHACLIntegrationNote"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="regulationReference"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="https://w3id.org/mod#competencyQuestion"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="AccessRestriction"/>
+        <Class IRI="LocalisationRestriction"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="Article4Violation"/>
+        <Class IRI="PolicyViolation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="CanonicalLocation"/>
+        <Class IRI="GeographicReference"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="ComplianceEvaluation"/>
+        <Class abbreviatedIRI="prov:Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="EUMemberState"/>
+        <Class IRI="CanonicalLocation"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="ProcessingRestriction"/>
+        <Class IRI="LocalisationRestriction"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="PublicSecurityJustification"/>
+        <Class IRI="Justification"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="StorageRestriction"/>
+        <Class IRI="LocalisationRestriction"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="RegulatoryArticle"/>
+        <NamedIndividual IRI="Article4"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="RegulatoryArticle"/>
+        <NamedIndividual IRI="Article5"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="skos:Collection"/>
+        <NamedIndividual IRI="CoreModule"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="skos:Collection"/>
+        <NamedIndividual IRI="ExtendedModule"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class abbreviatedIRI="skos:Collection"/>
+        <NamedIndividual IRI="IntegrationModule"/>
+    </ClassAssertion>
+    <SubObjectPropertyOf>
+        <ObjectProperty IRI="restrictsToMemberState"/>
+        <ObjectProperty IRI="restrictsToLocation"/>
+    </SubObjectPropertyOf>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="detectedIn"/>
+        <Class IRI="LocalisationRestriction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="evaluatedPolicy"/>
+        <Class IRI="ComplianceEvaluation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="foundRestriction"/>
+        <Class IRI="ComplianceEvaluation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="foundViolation"/>
+        <Class IRI="ComplianceEvaluation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="hasJustification"/>
+        <Class IRI="LocalisationRestriction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="normalizedAs"/>
+        <Class IRI="GeographicReference"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="restrictsToLocation"/>
+        <Class IRI="LocalisationRestriction"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="violatesArticle"/>
+        <Class IRI="PolicyViolation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="detectedIn"/>
+        <Class abbreviatedIRI="odrl:Constraint"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="evaluatedPolicy"/>
+        <Class abbreviatedIRI="odrl:Policy"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="foundRestriction"/>
+        <Class IRI="LocalisationRestriction"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="foundViolation"/>
+        <Class IRI="PolicyViolation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="hasJustification"/>
+        <Class IRI="Justification"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="normalizedAs"/>
+        <Class IRI="CanonicalLocation"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="restrictsToLocation"/>
+        <Class IRI="GeographicReference"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="restrictsToMemberState"/>
+        <Class IRI="EUMemberState"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="violatesArticle"/>
+        <Class IRI="RegulatoryArticle"/>
+    </ObjectPropertyRange>
+    <DataPropertyDomain>
+        <DataProperty IRI="complianceStatus"/>
+        <Class IRI="ComplianceEvaluation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="evaluationTimestamp"/>
+        <Class IRI="ComplianceEvaluation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="iso3166Alpha2"/>
+        <Class IRI="EUMemberState"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="iso3166Alpha3"/>
+        <Class IRI="EUMemberState"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="justificationRequired"/>
+        <Class IRI="LocalisationRestriction"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="originalValue"/>
+        <Class IRI="GeographicReference"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="restrictionType"/>
+        <Class IRI="LocalisationRestriction"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="violationDescription"/>
+        <Class IRI="PolicyViolation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="violationSeverity"/>
+        <Class IRI="PolicyViolation"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="complianceStatus"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="confidenceScore"/>
+        <Datatype abbreviatedIRI="xsd:decimal"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="detectionMethod"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="evaluationTimestamp"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="iso3166Alpha2"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="iso3166Alpha3"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="justificationRequired"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="originalValue"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="restrictionType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="violationDescription"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="violationSeverity"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>AccessRestriction</IRI>
+        <Literal xml:lang="en">Restriction on who can access data based on geographic location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>AccessRestriction</IRI>
+        <Literal xml:lang="en">Access Restriction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>AccessRestriction</IRI>
+        <Literal xml:lang="en">Extended class: Use for detailed classification of restriction types.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="dct:description"/>
+        <IRI>Article4</IRI>
+        <Literal xml:lang="en">Data localisation requirements shall be prohibited, unless they are 
+    justified on grounds of public security in compliance with the principle of proportionality.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Article4</IRI>
+        <Literal xml:lang="en">Article 4 - Prohibition of data localisation requirements</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>Article4</IRI>
+        <Literal xml:lang="en">Core individual: Central regulatory provision for FFDR compliance checking.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>Article4Violation</IRI>
+        <Literal xml:lang="en">Violation of Article 4: Prohibition of data localisation requirements 
+    unless justified on public security grounds.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Article4Violation</IRI>
+        <Literal xml:lang="en">Article 4 Violation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>Article4Violation</IRI>
+        <Literal xml:lang="en">Integration class: Specific subtype linking violations to regulatory articles.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="dct:description"/>
+        <IRI>Article5</IRI>
+        <Literal xml:lang="en">This Regulation shall not affect the powers of competent authorities 
+    to request, or obtain, access to data for the performance of their official duties.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Article5</IRI>
+        <Literal xml:lang="en">Article 5 - Availability of data to competent authorities</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>Article5</IRI>
+        <Literal xml:lang="en">Integration individual: May be relevant for data access restrictions.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>CanonicalLocation</IRI>
+        <Literal xml:lang="en">A normalized, standardized representation of a geographic location.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>CanonicalLocation</IRI>
+        <Literal xml:lang="en">Canonical Location</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>CanonicalLocation</IRI>
+        <Literal xml:lang="en">Extended class: Use when tracking normalization process from original to canonical form.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>ComplianceEvaluation</IRI>
+        <Literal xml:lang="en">An assessment of whether an ODRL policy complies with Regulation 2018/1807. 
+    Records findings, violations, and overall compliance status.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>ComplianceEvaluation</IRI>
+        <Literal xml:lang="en">Compliance Evaluation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>ComplianceEvaluation</IRI>
+        <Literal xml:lang="en">Core class: Essential for representing evaluation results.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>CoreModule</IRI>
+        <Literal xml:lang="en">Minimal set of classes and properties required for basic Article 4 
+    compliance detection. This module provides sufficient functionality for simple deployment 
+    scenarios where only violation detection is needed. Consists of 5 classes and 8 properties.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>ComplianceEvaluation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>EUMemberState</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>LocalisationRestriction</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>PolicyViolation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>RegulatoryArticle</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>complianceStatus</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>detectedIn</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>evaluatedPolicy</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>foundViolation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>justificationRequired</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>restrictionType</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>restrictsToMemberState</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>CoreModule</IRI>
+        <IRI>violatesArticle</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:note"/>
+        <IRI>CoreModule</IRI>
+        <Literal xml:lang="en">Use Case: Quick compliance checks on ODRL policies in data portals. 
+    Detects whether a policy restricts data to specific EU member states.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>CoreModule</IRI>
+        <Literal xml:lang="en">Core FFDR Module</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>EUMemberState</IRI>
+        <Literal xml:lang="en">One of the 27 member states of the European Union.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>EUMemberState</IRI>
+        <Literal xml:lang="en">EU Member State</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>EUMemberState</IRI>
+        <Literal xml:lang="en">Core class: Essential for identifying Article 4 violations.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>ExtendedModule</IRI>
+        <Literal xml:lang="en">Additional classes supporting rich provenance tracking, detailed 
+    restriction type classification, and justification documentation. Enables comprehensive 
+    reporting and audit trails. Consists of 6 classes and 7 properties.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>AccessRestriction</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>CanonicalLocation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>GeographicReference</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>ProcessingRestriction</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>PublicSecurityJustification</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>StorageRestriction</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>confidenceScore</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>detectionMethod</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>evaluationTimestamp</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>hasJustification</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>normalizedAs</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>originalValue</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>ExtendedModule</IRI>
+        <IRI>violationSeverity</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:note"/>
+        <IRI>ExtendedModule</IRI>
+        <Literal xml:lang="en">Use Case: Production data spaces requiring detailed compliance reports, 
+    provenance tracking, and integration with governance frameworks (GAIA-X, IDSA).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>ExtendedModule</IRI>
+        <Literal xml:lang="en">Extended FFDR Module</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>GeographicReference</IRI>
+        <Literal xml:lang="en">A reference to a geographic location found in an ODRL policy. 
+    May be represented as URI, ISO code, or string literal.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>GeographicReference</IRI>
+        <Literal xml:lang="en">Geographic Reference</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>GeographicReference</IRI>
+        <Literal xml:lang="en">Extended class: Use when tracking normalization process from original to canonical form.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>IntegrationModule</IRI>
+        <Literal xml:lang="en">Classes and properties for linking FFDR to external vocabularies 
+    (ODRL, PROV-O, DCT) and supporting interoperability with broader semantic web 
+    infrastructure. Consists of 3 classes, 2 named individuals, and 5 properties.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>Article4</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>Article4Violation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>Article5</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>Justification</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>RegulatoryArticle</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>foundRestriction</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>iso3166Alpha2</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>iso3166Alpha3</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>restrictsToLocation</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:member"/>
+        <IRI>IntegrationModule</IRI>
+        <IRI>violationDescription</IRI>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:note"/>
+        <IRI>IntegrationModule</IRI>
+        <Literal xml:lang="en">Use Case: Linking compliance evaluations to policy documents, integrating 
+    with existing provenance systems, and enabling SPARQL federation across data catalogs.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:prefLabel"/>
+        <IRI>IntegrationModule</IRI>
+        <Literal xml:lang="en">Integration Module</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>Justification</IRI>
+        <Literal xml:lang="en">Legal justification for a data localisation requirement. 
+    Must be based on public security grounds per Article 4.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>Justification</IRI>
+        <Literal xml:lang="en">Justification</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>Justification</IRI>
+        <Literal xml:lang="en">Integration class: Use when documenting exemptions under Article 4(1).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>LocalisationRestriction</IRI>
+        <Literal xml:lang="en">A detected geographic constraint in an ODRL policy that restricts where 
+    data can be stored, processed, or accessed. May violate Article 4 of Regulation 2018/1807.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>LocalisationRestriction</IRI>
+        <Literal xml:lang="en">Localisation Restriction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:definition"/>
+        <IRI>LocalisationRestriction</IRI>
+        <Literal xml:lang="en">Any requirement that data be stored or processed in a specific geographic 
+    location, particularly when that location is an EU member state.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>LocalisationRestriction</IRI>
+        <Literal xml:lang="en">Core class: Essential for all FFDR implementations.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>ModuleUsageNote</IRI>
+        <Literal xml:lang="en">
+    USING THE MODULES:
+    
+    Core Module Only (Minimal Implementation):
+    - Import only: LocalisationRestriction, ComplianceEvaluation, PolicyViolation, EUMemberState, Article4
+    - Use restrictionType as string datatype instead of subclasses
+    - Sufficient for: Simple yes/no compliance checking
+    
+    Core + Extended (Recommended for Production):
+    - Add: Restriction subclasses, justification tracking, provenance
+    - Sufficient for: Detailed reporting, audit trails, data space integration
+    
+    Full Ontology (Research &amp; Advanced Integration):
+    - All classes and properties
+    - Sufficient for: SPARQL federation, semantic interoperability, research analysis
+    </Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>PolicyViolation</IRI>
+        <Literal xml:lang="en">A specific non-compliance instance where an ODRL policy violates 
+    Regulation 2018/1807.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>PolicyViolation</IRI>
+        <Literal xml:lang="en">Policy Violation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>PolicyViolation</IRI>
+        <Literal xml:lang="en">Core class: Essential for reporting what regulatory requirement was violated.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>ProcessingRestriction</IRI>
+        <Literal xml:lang="en">Restriction on where data processing activities may occur.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>ProcessingRestriction</IRI>
+        <Literal xml:lang="en">Processing Restriction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>ProcessingRestriction</IRI>
+        <Literal xml:lang="en">Extended class: Use for detailed classification of restriction types.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>PublicSecurityJustification</IRI>
+        <Literal xml:lang="en">Justification based on public security as defined in Article 52 TFEU: 
+    genuine and sufficiently serious threat to fundamental interests of society.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>PublicSecurityJustification</IRI>
+        <Literal xml:lang="en">Public Security Justification</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>PublicSecurityJustification</IRI>
+        <Literal xml:lang="en">Extended class: Use for detailed documentation of public security exemptions.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>RegulatoryArticle</IRI>
+        <Literal xml:lang="en">An article from Regulation 2018/1807.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>RegulatoryArticle</IRI>
+        <Literal xml:lang="en">Regulatory Article</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>RegulatoryArticle</IRI>
+        <Literal xml:lang="en">Integration class: Links violations to specific regulatory provisions.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>SHACLIntegrationNote</IRI>
+        <Literal xml:lang="en">This ontology is designed to work with SHACL shapes that validate 
+    ODRL policies. The SHACL validation results (sh:ValidationResult) can be transformed 
+    into instances of ffdr:ComplianceEvaluation and ffdr:PolicyViolation.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>StorageRestriction</IRI>
+        <Literal xml:lang="en">Restriction on where data may be physically stored.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>StorageRestriction</IRI>
+        <Literal xml:lang="en">Storage Restriction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>StorageRestriction</IRI>
+        <Literal xml:lang="en">Extended class: Use for detailed classification of restriction types.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>complianceStatus</IRI>
+        <Literal xml:lang="en">Overall compliance status: compliant, non-compliant, or requires-review.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>complianceStatus</IRI>
+        <Literal xml:lang="en">compliance status</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>complianceStatus</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>confidenceScore</IRI>
+        <Literal xml:lang="en">Confidence level of the detection (0.0 to 1.0).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>confidenceScore</IRI>
+        <Literal xml:lang="en">confidence score</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>confidenceScore</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>detectedIn</IRI>
+        <Literal xml:lang="en">Links a localisation restriction to the specific ODRL constraint where it was detected.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>detectedIn</IRI>
+        <Literal xml:lang="en">detected in</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>detectedIn</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>detectionMethod</IRI>
+        <Literal xml:lang="en">Method used to detect the restriction: uri-match, iso-code, string-match, fuzzy.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>detectionMethod</IRI>
+        <Literal xml:lang="en">detection method</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>detectionMethod</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>evaluatedPolicy</IRI>
+        <Literal xml:lang="en">The ODRL policy that was evaluated for compliance.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>evaluatedPolicy</IRI>
+        <Literal xml:lang="en">evaluated policy</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>evaluatedPolicy</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>evaluationTimestamp</IRI>
+        <Literal xml:lang="en">When the compliance evaluation was performed.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>evaluationTimestamp</IRI>
+        <Literal xml:lang="en">evaluation timestamp</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>evaluationTimestamp</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>foundRestriction</IRI>
+        <Literal xml:lang="en">Links an evaluation to a detected localisation restriction.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>foundRestriction</IRI>
+        <Literal xml:lang="en">found restriction</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>foundRestriction</IRI>
+        <Literal xml:lang="en">Integration property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>foundViolation</IRI>
+        <Literal xml:lang="en">Links an evaluation to a detected policy violation.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>foundViolation</IRI>
+        <Literal xml:lang="en">found violation</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>foundViolation</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>hasJustification</IRI>
+        <Literal xml:lang="en">Links a restriction to its legal justification (if any).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>hasJustification</IRI>
+        <Literal xml:lang="en">has justification</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>hasJustification</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>iso3166Alpha2</IRI>
+        <Literal xml:lang="en">Two-letter country code (e.g., DE, FR, ES).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>iso3166Alpha2</IRI>
+        <Literal xml:lang="en">ISO 3166 Alpha-2 code</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>iso3166Alpha2</IRI>
+        <Literal xml:lang="en">Integration property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>iso3166Alpha3</IRI>
+        <Literal xml:lang="en">Three-letter country code (e.g., DEU, FRA, ESP).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>iso3166Alpha3</IRI>
+        <Literal xml:lang="en">ISO 3166 Alpha-3 code</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>iso3166Alpha3</IRI>
+        <Literal xml:lang="en">Integration property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>justificationRequired</IRI>
+        <Literal xml:lang="en">Boolean flag indicating if public security justification is required.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>justificationRequired</IRI>
+        <Literal xml:lang="en">justification required</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>justificationRequired</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>normalizedAs</IRI>
+        <Literal xml:lang="en">Links a geographic reference to its canonical normalized form.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>normalizedAs</IRI>
+        <Literal xml:lang="en">normalized as</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>normalizedAs</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>originalValue</IRI>
+        <Literal xml:lang="en">The original string/URI value as found in the ODRL policy.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>originalValue</IRI>
+        <Literal xml:lang="en">original value</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>originalValue</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>regulationReference</IRI>
+        <Literal xml:lang="en">Reference to specific articles/recitals in Regulation 2018/1807.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>regulationReference</IRI>
+        <Literal xml:lang="en">regulation reference</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>restrictionType</IRI>
+        <Literal xml:lang="en">Type of restriction: storage, processing, or access.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>restrictionType</IRI>
+        <Literal xml:lang="en">restriction type</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>restrictionType</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>restrictsToLocation</IRI>
+        <Literal xml:lang="en">Indicates the geographic location to which data is restricted.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>restrictsToLocation</IRI>
+        <Literal xml:lang="en">restricts to location</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>restrictsToLocation</IRI>
+        <Literal xml:lang="en">Integration property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>restrictsToMemberState</IRI>
+        <Literal xml:lang="en">Indicates restriction to a specific EU member state (Article 4 concern).</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>restrictsToMemberState</IRI>
+        <Literal xml:lang="en">restricts to member state</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>restrictsToMemberState</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>violatesArticle</IRI>
+        <Literal xml:lang="en">Indicates which regulatory article is violated.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>violatesArticle</IRI>
+        <Literal xml:lang="en">violates article</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>violatesArticle</IRI>
+        <Literal xml:lang="en">Core property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>violationDescription</IRI>
+        <Literal xml:lang="en">Human-readable description of the violation.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>violationDescription</IRI>
+        <Literal xml:lang="en">violation description</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>violationDescription</IRI>
+        <Literal xml:lang="en">Integration property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>violationSeverity</IRI>
+        <Literal xml:lang="en">Severity level: critical, high, medium, low.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>violationSeverity</IRI>
+        <Literal xml:lang="en">violation severity</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="skos:scopeNote"/>
+        <IRI>violationSeverity</IRI>
+        <Literal xml:lang="en">Extended property</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:comment"/>
+        <IRI>https://w3id.org/mod#competencyQuestion</IRI>
+        <Literal xml:lang="en">A question this ontology is designed to answer.</Literal>
+    </AnnotationAssertion>
+    <AnnotationAssertion>
+        <AnnotationProperty abbreviatedIRI="rdfs:label"/>
+        <IRI>https://w3id.org/mod#competencyQuestion</IRI>
+        <Literal xml:lang="en">competency question</Literal>
+    </AnnotationAssertion>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

@@ -471,11 +471,11 @@ prov:Activity rdf:type owl:Class .
             skos:definition """Minimal set of classes and properties required for basic Article 4 
     compliance detection. This module provides sufficient functionality for simple deployment 
     scenarios where only violation detection is needed. Consists of 5 classes and 8 properties."""@en ;
-            skos:member :Article4 ,
-                        :ComplianceEvaluation ,
+            skos:member :ComplianceEvaluation ,
                         :EUMemberState ,
                         :LocalisationRestriction ,
                         :PolicyViolation ,
+                        :RegulatoryArticle ,        # ← ADDED THIS
                         :complianceStatus ,
                         :detectedIn ,
                         :evaluatedPolicy ,
@@ -518,8 +518,10 @@ prov:Activity rdf:type owl:Class .
                             skos:Collection ;
                    skos:definition """Classes and properties for linking FFDR to external vocabularies 
     (ODRL, PROV-O, DCT) and supporting interoperability with broader semantic web 
-    infrastructure. Consists of 3 classes and 5 properties."""@en ;
-                   skos:member :Article4Violation ,
+    infrastructure. Consists of 3 classes, 2 named individuals, and 5 properties."""@en ;
+                   skos:member :Article4 ,              # ← ADDED
+                               :Article5 ,              # ← ADDED
+                               :Article4Violation ,
                                :Justification ,
                                :RegulatoryArticle ,
                                :foundRestriction ,
