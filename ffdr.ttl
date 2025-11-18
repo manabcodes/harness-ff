@@ -518,12 +518,11 @@ prov:Activity rdf:type owl:Class .
                             skos:Collection ;
                    skos:definition """Classes and properties for linking FFDR to external vocabularies 
     (ODRL, PROV-O, DCT) and supporting interoperability with broader semantic web 
-    infrastructure. Consists of 3 classes, 2 named individuals, and 5 properties."""@en ;
+    infrastructure. Consists of 2 classes, 2 named individuals, and 5 properties."""@en ;
                    skos:member :Article4 ,              # ← ADDED
                                :Article5 ,              # ← ADDED
                                :Article4Violation ,
                                :Justification ,
-                               :RegulatoryArticle ,
                                :foundRestriction ,
                                :iso3166Alpha2 ,
                                :iso3166Alpha3 ,
